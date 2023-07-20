@@ -1,6 +1,7 @@
 package ppal;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import clases.Juego;
 import excepciones.BlackJackException;
@@ -41,8 +42,36 @@ public class Ppal {
 		}while (seguir);
 		
 		System.out.println("Juega la banca...");
+		System.out.println("La banca lleva en la mano:");
+		System.out.println(juego.getManoBanca());
+		try {
+			while (juego.juegaBanca()){
+				TimeUnit.SECONDS.sleep(3);
+				System.out.println("La banca lleva en la mano:");
+				System.out.println(juego.getManoBanca());
+				
+				
+			}
+			System.out.println("La banca lleva en la mano:");
+			System.out.println(juego.getManoBanca());
+		} catch (FinDeJuegoException e) {
+			System.out.println("La banca se ha pasado.");
+			System.out.println("La banca lleva en la mano:");
+			System.out.println(juego.getManoBanca());
+		} catch (BlackJackException e) {
+			System.out.println("La banca ha obtenido BlackJack.");
+			System.out.println("La banca lleva en la mano:");
+			System.out.println(juego.getManoBanca());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
+		switch(juego.ganador()) {
+		case "banca": System.out.println("Ha ganado la banca"); break;
+		case "jugador": System.out.println("Ha ganado el jugador"); break;
+		default: System.out.println("No hay ganador...");
+		}
 		
 	}
 

@@ -18,8 +18,8 @@ public class Juego {
 		baraja.barajar();
 		jugador = new Mano();
 		banca = new Mano();
-		pedirCarta(jugador);
-		pedirCarta(banca);
+	//	pedirCarta(jugador);
+		//pedirCarta(banca);
 		
 	}
 	
@@ -29,6 +29,10 @@ public class Juego {
 	
 	public Mano getManoJugador() {
 		return this.jugador;
+	}
+	
+	public Mano getManoBanca() {
+		return this.banca;
 	}
 	
 	public void pideCarta() throws FinDeJuegoException, BlackJackException {
@@ -41,7 +45,7 @@ public class Juego {
 		}
 	}
 	
-	public boolean juegaBanca() {
+	public boolean juegaBanca() throws FinDeJuegoException, BlackJackException {
 		pedirCarta(banca);
 		if (banca.finDeJuego()){
 			throw new FinDeJuegoException();
@@ -59,6 +63,28 @@ public class Juego {
 			}
 		}
 	}
+	
+	public String ganador() {
+		String res ="banca";
+		if (!jugador.finDeJuego()) {
+			if (jugador.valorMano()>banca.valorMano()) {
+				res="jugador";
+			} else if (jugador.valorMano()==banca.valorMano()) {
+				res="empate";
+			} else {
+				if (banca.finDeJuego()) {
+					res="jugador";
+				} /*else {
+					res="banca";
+				}*/
+			}
+		} else {
+			res="banca";
+		}
+		return res;
+	}
+
+	
 
 
 }

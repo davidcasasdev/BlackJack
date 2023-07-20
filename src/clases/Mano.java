@@ -10,8 +10,17 @@ public class Mano extends Mazo {
 	
 	public int valorMano() {
 		int suma=0;
+		int numAses=0;
 		for (Carta carta : baraja) {
-			suma = suma + carta.getValor();
+			if (carta.getNumero()==1) {
+				suma = suma+1;
+				numAses++;
+			} else {
+				suma = suma + carta.getValor();
+			}
+		}
+		if (numAses>0 && suma+10<=21) {
+			suma=suma+10;
 		}
 		return suma;
 	}
@@ -33,7 +42,13 @@ public class Mano extends Mazo {
 		this.baraja.add(mazo.solicitarCarta());
 	}
 
+	public int getSize()
+	{
+		return this.baraja.size();
+	}
 	
-	
+	public Carta getCarta(int i) {
+		return this.baraja.get(i);
+	}
 	
 }

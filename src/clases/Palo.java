@@ -1,5 +1,5 @@
 package clases;
 
 public enum Palo {
-	TREBOL, DIAMANTES, CORAZONES, PICAS
+	TREBOL, DIAMANTE, CORAZONES, PICAS
 }
